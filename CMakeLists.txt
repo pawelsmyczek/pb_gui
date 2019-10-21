@@ -15,6 +15,9 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 add_executable(pb_gui
   main.cpp
+  boxwindow.cpp
+  boxwindow.h
+  boxwindow.ui
   mainwindow.cpp
   mainwindow.h
   mainwindow.ui

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BoxWindow</class>
+ <widget class="QMainWindow" name="BoxWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>530</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Generuj fakture</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuOpcje">
+    <property name="title">
+     <string>Opcje</string>
+    </property>
+    <addaction name="actionEdytuj_wszystko"/>
+    <addaction name="actionPowr_t"/>
+   </widget>
+   <addaction name="menuOpcje"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionEdytuj_wszystko">
+   <property name="text">
+    <string>Edytuj wszystko</string>
+   </property>
+  </action>
+  <action name="actionPowr_t">
+   <property name="text">
+    <string>Powrót</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

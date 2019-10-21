@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.10.0, 2019-10-21T00:05:08. -->
+<!-- Written by QtCreator 4.10.0, 2019-10-21T20:05:36. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -322,7 +322,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/tmp/QtCreator-JasaXd/qtc-cmake-LZjCKMTT</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/pablito/Qt_Projects/build-pb_gui-Desktop_Qt_5_13_1_GCC_64bit-Debug</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
