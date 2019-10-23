@@ -9,6 +9,19 @@ BoxWindow::BoxWindow(QWidget *parent) :
     connect(ui->actionPowr_t, SIGNAL(triggered()), this, SLOT(backToMain()));
 }
 
+void BoxWindow::changeTitle(bool checked)
+{
+    // this->close();
+    auto button = qobject_cast<QPushButton *>(sender());
+    Q_ASSERT(button);
+    qDebug() << button->text();
+    title = button->text();
+    BoxWindow* box_window = new BoxWindow();
+
+    box_window->setWindowTitle(title);
+    box_window->show();
+}
+
 void BoxWindow::backToMain()
 {
     this->close();

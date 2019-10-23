@@ -2,8 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "QPushButton"
-#include "QWidget"
+#include <QPushButton>
+#include <QHoverEvent>
+#include <QSignalMapper>
+#include <QDebug>
+#include <QMouseEvent>
+#include <QWidget>
 #include "boxwindow.h"
 
 QT_BEGIN_NAMESPACE
@@ -18,10 +22,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-private slots:
-    void handleButton();
+
+    void mouseMoveEvent(QMouseEvent*);
+    bool eventFilter(QObject*, QEvent*);
 private:
     Ui::MainWindow *ui;
+    BoxWindow *box_window;
     QPushButton *p_button;
+    QPushButton* buttons[10];
 };
 #endif // MAINWINDOW_H
