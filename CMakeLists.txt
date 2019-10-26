@@ -18,6 +18,8 @@ add_executable(pb_gui
   boxwindow.cpp
   boxwindow.h
   boxwindow.ui
+  calendar.cpp
+  calendar.h
   mainwindow.cpp
   mainwindow.h
   mainwindow.ui

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <QPushButton>
+#include "calendar.h"
 
 namespace Ui {
 class BoxWindow;
@@ -16,12 +17,13 @@ class BoxWindow : public QMainWindow
 public:
     explicit BoxWindow(QWidget *parent = nullptr);
     ~BoxWindow();
-
+    void paintCalendar(Calendar&);
 public slots:
     void changeTitle(bool);
 private slots:
     void backToMain();
 private:
+    //Calendar *calendar;
     Ui::BoxWindow *ui;
     QString title;
 };
