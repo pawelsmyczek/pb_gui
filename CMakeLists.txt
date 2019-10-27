@@ -18,11 +18,17 @@ add_executable(pb_gui
   boxwindow.cpp
   boxwindow.h
   boxwindow.ui
+  not_rentedboxwindow.cpp
+  not_rentedboxwindow.h
+  not_rentedboxwindow.ui
   calendar.cpp
   calendar.h
   mainwindow.cpp
   mainwindow.h
   mainwindow.ui
+  renter_addition.cpp
+  renter_addition.h
+  renter_addition.ui
 )
 
 target_link_libraries(pb_gui PRIVATE Qt5::Widgets)

@@ -9,6 +9,7 @@
 #include <QMouseEvent>
 #include <QWidget>
 #include "boxwindow.h"
+#include "not_rentedboxwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow;
@@ -28,6 +29,7 @@ public:
 private:
     Ui::MainWindow *ui;
     BoxWindow *box_window;
+    NotRentedBoxWindow *not_rentedboxwindow;
     QPushButton *p_button;
     QPushButton* buttons[10];
 };
