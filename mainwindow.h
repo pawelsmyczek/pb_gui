@@ -8,8 +8,11 @@
 #include <QDebug>
 #include <QMouseEvent>
 #include <QWidget>
+#include <QSqlDatabase>
+#include <vector>
 #include "boxwindow.h"
 #include "not_rentedboxwindow.h"
+#include "db_handler.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow;
@@ -25,12 +28,18 @@ public:
     ~MainWindow();
 
     void mouseMoveEvent(QMouseEvent*);
-    bool eventFilter(QObject*, QEvent*);
+//    bool eventFilter(QObject*, QEvent*);
+    void connectButton(bool, QPushButton*);
+//protected:
+    static const int EXIT_CODE_REBOOT;
+private slots:
+    void logoutFromDB();
 private:
     Ui::MainWindow *ui;
     BoxWindow *box_window;
     NotRentedBoxWindow *not_rentedboxwindow;
+    // QSqlDatabase db;
     QPushButton *p_button;
-    QPushButton* buttons[10];
+    std::vector<QPushButton*> buttons;
 };
 #endif // MAINWINDOW_H

@@ -4,7 +4,8 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <QPushButton>
-#include "calendar.h"
+#include <QSqlDatabase>
+#include <QRegularExpression>
 #include "renter_addition.h"
 
 namespace Ui {
@@ -19,14 +20,16 @@ public:
     explicit NotRentedBoxWindow(QWidget *parent = nullptr);
     ~NotRentedBoxWindow();
 public slots:
-    void changeTitle(bool);
+    void initializeBoxWindow(bool);
 private slots:
     void backToMain();
     void openRenterAddition();
 private:
     Ui::not_rentedboxwindow *ui;
     QString title;
+    QSqlDatabase db;
     RenterAddition *new_renter;
+    QString number1;
 };
 
 #endif // NOT_RENTEDBOXWINDOW_H

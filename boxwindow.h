@@ -5,6 +5,11 @@
 #include <QDebug>
 #include <QPushButton>
 #include "calendar.h"
+#include <QRegularExpression>
+#include "db_handler.h"
+#include <QSqlQuery>
+#include <vector>
+#include <iterator>
 
 namespace Ui {
 class BoxWindow;
@@ -19,13 +24,17 @@ public:
     ~BoxWindow();
     void paintCalendar(Calendar&);
 public slots:
-    void changeTitle(bool);
+    void initializeBoxWindow(bool);
 private slots:
     void backToMain();
 private:
     //Calendar *calendar;
     Ui::BoxWindow *ui;
     QString title;
+    QString number1;
+    QDate starting_date, end_date;
+    std::vector<QString> reservationData;
+    std::vector<QString> renterData;
 };
 
 #endif // BOXWINDOW_H

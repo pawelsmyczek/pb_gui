@@ -12,23 +12,29 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5Sql REQUIRED)
 
 add_executable(pb_gui
   main.cpp
   boxwindow.cpp
   boxwindow.h
   boxwindow.ui
-  not_rentedboxwindow.cpp
-  not_rentedboxwindow.h
-  not_rentedboxwindow.ui
   calendar.cpp
   calendar.h
+  db_handler.h
+  db_handler.cpp
+  loginwidow.cpp
+  loginwidow.h
+  loginwidow.ui
   mainwindow.cpp
   mainwindow.h
   mainwindow.ui
+  not_rentedboxwindow.cpp
+  not_rentedboxwindow.h
+  not_rentedboxwindow.ui
   renter_addition.cpp
   renter_addition.h
   renter_addition.ui
 )
 
-target_link_libraries(pb_gui PRIVATE Qt5::Widgets)
+target_link_libraries(pb_gui PRIVATE Qt5::Widgets Qt5::Sql)

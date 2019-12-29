@@ -1,5 +1,9 @@
-#include "not_rentedboxwindow.h"
+﻿#include "not_rentedboxwindow.h"
 #include "ui_not_rentedboxwindow.h"
+#include "db_handler.h"
+#include "calendar.h"
+#include <QSqlQuery>
+
 
 NotRentedBoxWindow::NotRentedBoxWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -7,7 +11,9 @@ NotRentedBoxWindow::NotRentedBoxWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->actionPowr_t, SIGNAL(triggered()), this, SLOT(backToMain()));
-    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(openRenterAddition()));
+
+
+     //qDebug() << "box from constructor" << box;
 }
 
 NotRentedBoxWindow::~NotRentedBoxWindow()
@@ -16,22 +22,31 @@ NotRentedBoxWindow::~NotRentedBoxWindow()
 }
 
 
-void NotRentedBoxWindow::changeTitle(bool checked)
+void NotRentedBoxWindow::initializeBoxWindow(bool checked)
 {
     // this->close();
     auto button = qobject_cast<QPushButton *>(sender());
     Q_ASSERT(button);
-    qDebug() << button->text();
+    QSqlQuery *q = new QSqlQuery(QSqlDatabase::database("PB_CONN"));
     title = button->text();
-    NotRentedBoxWindow* box_window = new NotRentedBoxWindow();
-
-    box_window->setWindowTitle(title);
-    box_window->show();
+    QRegularExpression re("(?<=Box ).+");
+    QRegularExpressionMatch match = re.match(title);
+    this->setWindowTitle(title);
+    this->show();
+    this->number1 = match.captured(0);
+    int box = this->number1.toInt();
+    this->ui->lineEdit->setText(selectBoxSize(q, box));
+    qDebug() << button->text() << box;
+    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(openRenterAddition()));
 }
+
+
 
 void NotRentedBoxWindow::openRenterAddition()
 {
-    new_renter = new RenterAddition();
+    new_renter = new RenterAddition(this);
+    // connect(new_renter,SIGNAL(closed()),this,SLOT(close()));
+    new_renter->boxNumber = this->number1;
     new_renter->show();
 }
 

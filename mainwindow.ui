@@ -29,6 +29,7 @@
     </property>
     <addaction name="actionLista_klient_w"/>
     <addaction name="actionLista_box_w"/>
+    <addaction name="actionWyloguj"/>
    </widget>
    <widget class="QMenu" name="menuPomoc">
     <property name="title">
@@ -60,6 +61,11 @@
   <action name="actionLista_box_w">
    <property name="text">
     <string>Lista boxów</string>
+   </property>
+  </action>
+  <action name="actionWyloguj">
+   <property name="text">
+    <string>Wyloguj</string>
    </property>
   </action>
  </widget>
