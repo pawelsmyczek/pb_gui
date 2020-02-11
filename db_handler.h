@@ -11,7 +11,7 @@
 #include <algorithm>
 #include <vector>
 
-QSqlDatabase addConnection(const QString &, const QString &, const QString &,
+bool addConnection(const QString &, const QString &, const QString &,
                             const QString &, const QString &, int);
 
 const auto SEL_BOXES = QLatin1String(R"(
@@ -26,6 +26,7 @@ int countBoxes(QSqlQuery*, int);
 void updateBoxState(QSqlQuery*, QString);
 const QString insertRenter(QSqlQuery*, QString, QString, QString, QString, QString, QString, QString);
 void insertReservation(QSqlQuery*, QDate, QDate, QString, QString);
+void insertTransaction(QSqlQuery*, QString, QDate, QString, QString, QString, QString, QDate = QDate::fromString("01011900", "dd.MM.yy"), QDate = QDate::fromString("01011900", "dd.MM.yy"));
 const QString selectBoxSize(QSqlQuery*, int);
 void selectReservation(QSqlQuery*, QString, std::vector<QString>*);
 void selectRenter(QSqlQuery*, QString, std::vector<QString>*);

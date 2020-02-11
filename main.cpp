@@ -6,8 +6,8 @@
 int main(int argc, char *argv[])
 {
     int currentExitCode = 0;
-    do{
     QApplication a(argc, argv);
+    do{
     if(QSqlDatabase::contains("PB_CONN"))
     {
         MainWindow *w = new MainWindow();
@@ -16,10 +16,10 @@ int main(int argc, char *argv[])
     }
     else
     {
+        qDebug() << "no db like that";
         LoginWidow *l = new LoginWidow();
         l->show();
         currentExitCode = a.exec();
-        qDebug() << "no db like that";
     }
     } while(currentExitCode == MainWindow::EXIT_CODE_REBOOT);
 

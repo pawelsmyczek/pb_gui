@@ -4,12 +4,13 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <QPushButton>
-#include "calendar.h"
 #include <QRegularExpression>
+#include "calendar.h"
 #include "db_handler.h"
+#include "invoicegen.h"
 #include <QSqlQuery>
+#include <QMessageBox>
 #include <vector>
-#include <iterator>
 
 namespace Ui {
 class BoxWindow;
@@ -25,14 +26,22 @@ public:
     void paintCalendar(Calendar&);
 public slots:
     void initializeBoxWindow(bool);
+    void generateInvoice();
+protected:
+    void changeStateOfUi();
 private slots:
     void backToMain();
+    void editMode();
+    void addPayment();
+    void depositPayment();
+    void approveChanges();
 private:
     //Calendar *calendar;
     Ui::BoxWindow *ui;
     QString title;
-    QString number1;
-    QDate starting_date, end_date;
+
+    QString number1, amount;
+    QDate starting_date, end_date, trans_date, trans_start, trans_end;
     std::vector<QString> reservationData;
     std::vector<QString> renterData;
 };

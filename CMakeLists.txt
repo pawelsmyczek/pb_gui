@@ -13,6 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt5Sql REQUIRED)
+find_package(Qt5PrintSupport REQUIRED)
 
 add_executable(pb_gui
   main.cpp
@@ -23,6 +24,8 @@ add_executable(pb_gui
   calendar.h
   db_handler.h
   db_handler.cpp
+  invoicegen.cpp
+  invoicegen.h
   loginwidow.cpp
   loginwidow.h
   loginwidow.ui
@@ -37,4 +40,4 @@ add_executable(pb_gui
   renter_addition.ui
 )
 
-target_link_libraries(pb_gui PRIVATE Qt5::Widgets Qt5::Sql)
+target_link_libraries(pb_gui PRIVATE Qt5::Widgets Qt5::Sql Qt5::PrintSupport)

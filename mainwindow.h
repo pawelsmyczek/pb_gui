@@ -32,6 +32,8 @@ public:
     void connectButton(bool, QPushButton*);
 //protected:
     static const int EXIT_CODE_REBOOT;
+    void populate_boxes();
+    
 private slots:
     void logoutFromDB();
 private:

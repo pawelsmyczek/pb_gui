@@ -27,7 +27,6 @@ private slots:
 private:
     Ui::not_rentedboxwindow *ui;
     QString title;
-    QSqlDatabase db;
     RenterAddition *new_renter;
     QString number1;
 };

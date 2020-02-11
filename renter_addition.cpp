@@ -48,21 +48,21 @@ void RenterAddition::addRenter()
     {
         QSqlDatabase::database().transaction();
         try {
-//            QString cli_id = insertRenter(q, this->name, this->surname, this->address,
-//                     this->id, this->mobile, this->mail, this->account_nr);
-//            insertReservation(q1, ui->dateEdit->date(), ui->dateEdit_2->date(), this->boxNumber, cli_id);
-//            updateBoxState(q2, this->boxNumber);
+            QString cli_id = insertRenter(q, this->name, this->surname, this->address,
+                     this->id, this->mobile, this->mail, this->account_nr);
+            insertReservation(q1, ui->dateEdit->date(), ui->dateEdit_2->date(), this->boxNumber, cli_id);
+            updateBoxState(q2, this->boxNumber);
             qDebug() << this->name << this->surname << this->address << this->id << this->mobile << this->mail << this->account_nr << "has been inserted";
             QMessageBox::StandardButton added = QMessageBox::information(this, "Renter added",
                              "You have succesfully added renter to box");
             if(added == QMessageBox::Ok || added == QMessageBox::Close) {
+                this->parentWidget()->parentWidget()->close();
+                this->parentWidget()->close();
+                this->close();
                 qDebug() << "Performing application reboot...";
-                this->parentWidget()->parentWidget()->update();
-                this->parentWidget()->hide();
-                this->hide();
+                QSqlDatabase::database().commit();
+                qApp->exit( MainWindow::EXIT_CODE_REBOOT );
             }
-            QSqlDatabase::database().commit();
-
 
 
         } catch (...) {
@@ -81,6 +81,7 @@ void RenterAddition::showAllHiddenTopLevelWidgets()
     }
 
 }
+
 
 RenterAddition::~RenterAddition()
 {

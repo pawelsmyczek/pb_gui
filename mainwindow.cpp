@@ -1,13 +1,16 @@
 #include "mainwindow.h"
+#include "loginwidow.h"
 #include "./ui_mainwindow.h"
 #include <string>
 #include <QSqlQuery>
 
 /*
  * TODO:
- * - generator faktur
- * - sprawdzenie, czy kaucja oplacona
- * - edycja boxu
+ * - generator faktur (w trakcie)
+ * - sprawdzenie, czy box oplacony
+ * - lista klientow i lista boxow
+ * - edycja boxu (usuniecie / przedluzenie / skrocenie rezerwacji)
+ * - cron job sprawdzajacy stan boxu (data konca wynajmu < aktualna data) (update jest, trzeba cron joba ustawic)
  *
  */
 
@@ -21,6 +24,32 @@ MainWindow::MainWindow(QWidget *parent)
     //centralWidget()->setAttribute(Qt::WA_TransparentForMouseEvents);
     ui->setupUi(this);
     qApp->installEventFilter(this);
+    populate_boxes();
+    qDebug() << "Main window started";
+}
+
+int const MainWindow::EXIT_CODE_REBOOT = -123456789;
+
+void MainWindow::connectButton(bool is_rented, QPushButton *button)
+{
+    if(!is_rented)
+    {
+        not_rentedboxwindow = new NotRentedBoxWindow(this);
+        button->setStyleSheet("background-color:red;");
+        connect(button, SIGNAL(clicked(bool)), not_rentedboxwindow, SLOT(initializeBoxWindow(bool)));
+    }
+    else
+    {
+        box_window = new BoxWindow(this);
+        button->setStyleSheet("background-color:green;");
+        connect(button, SIGNAL(clicked(bool)), box_window, SLOT(initializeBoxWindow(bool)));
+    }
+}
+
+
+
+void MainWindow::populate_boxes()
+{
     int box = 0, corridor = 1, number_of_boxes = 0, boxes_flag = 1, boxes_on_side = 1, divider = 0, offset = 1;
     bool is_rented = false;
     connect(ui->actionWyloguj,SIGNAL(triggered()),this,SLOT(logoutFromDB()));
@@ -28,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     QSqlQuery *q = new QSqlQuery(QSqlDatabase::database("PB_CONN"));
     QSqlQuery *counter = new QSqlQuery(QSqlDatabase::database("PB_CONN"));
     if(!q->exec(SEL_BOXES)) qDebug() << "Failed to execute query SEL_BOXES" << q->lastError().text();
-    // MAPOWANIE BOXOW
+    // MAPOWANIE BOXOW po 10 na strone w korytarzu
     number_of_boxes = countBoxes(counter, corridor);
     while(q->next()){
         box             = q->value(0).toInt();
@@ -54,31 +83,22 @@ MainWindow::MainWindow(QWidget *parent)
 
         number_of_boxes = countBoxes(counter, corridor);
     }
-    qDebug() << "Main window started";
+    delete counter;
+    delete q;
 }
 
-int const MainWindow::EXIT_CODE_REBOOT = -123456789;
 
-void MainWindow::connectButton(bool is_rented, QPushButton *button)
-{
-    if(!is_rented)
-    {
-        not_rentedboxwindow = new NotRentedBoxWindow(this);
-        button->setStyleSheet("background-color:red;");
-        connect(button, SIGNAL(clicked(bool)), not_rentedboxwindow, SLOT(initializeBoxWindow(bool)));
-    }
-    else
-    {
-        box_window = new BoxWindow(this);
-        button->setStyleSheet("background-color:green;");
-        connect(button, SIGNAL(clicked(bool)), box_window, SLOT(initializeBoxWindow(bool)));
-    }
-}
+
 
 void MainWindow::logoutFromDB(){
     QSqlDatabase::database("PB_CONN").close();
-    parentWidget()->
-    parentWidget()->show();
+    QSqlDatabase::removeDatabase("PB_CONN"); // has to be called for a named connection
+    if(parentWidget() != nullptr)
+        parentWidget()->show();
+    else{
+        LoginWidow *l = new LoginWidow();
+        l->show();
+    }
     this->close();
 }
 
@@ -95,6 +115,7 @@ void MainWindow::logoutFromDB(){
 //    return false;
 //}
 
+
 void MainWindow::mouseMoveEvent(QMouseEvent* event)
 {
     QString x, y;
@@ -104,8 +125,14 @@ void MainWindow::mouseMoveEvent(QMouseEvent* event)
     qDebug() << y;
 }
 
+
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete p_button;
 }
+
+
+
+
 

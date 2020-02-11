@@ -27,7 +27,7 @@
     <property name="title">
      <string>Menu</string>
     </property>
-    <addaction name="actionLista_klient_w"/>
+    <addaction name="actionLista_rezerwacji"/>
     <addaction name="actionLista_box_w"/>
     <addaction name="actionWyloguj"/>
    </widget>
@@ -53,9 +53,9 @@
     <string>O twórcy</string>
    </property>
   </action>
-  <action name="actionLista_klient_w">
+  <action name="actionLista_rezerwacji">
    <property name="text">
-    <string>Lista klientów</string>
+    <string>Lista rezerwacji</string>
    </property>
   </action>
   <action name="actionLista_box_w">

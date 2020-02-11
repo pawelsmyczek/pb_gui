@@ -24,7 +24,6 @@ private:
     Ui::LoginWidow *ui;
     QString name;
     QString pass;
-    QSqlDatabase db;
     MainWindow *main;
 };
 

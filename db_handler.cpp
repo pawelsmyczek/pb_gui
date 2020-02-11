@@ -1,6 +1,6 @@
 #include "db_handler.h"
 
-QSqlDatabase addConnection(const QString &driver, const QString &dbName, const QString &host,
+bool addConnection(const QString &driver, const QString &dbName, const QString &host,
                             const QString &user, const QString &passwd, int port)
 {
     QSqlError err;
@@ -16,8 +16,9 @@ QSqlDatabase addConnection(const QString &driver, const QString &dbName, const Q
         QMessageBox::warning(nullptr, "Unable to open database",
                              "An error occured while connecting to db: "+err.text());
         qDebug() << "Could not open connection" << err.text();
+        return false;
     }
-    return db;
+    return true;
 }
 
 int countBoxes(QSqlQuery* q, int number)
@@ -77,9 +78,41 @@ void insertReservation(QSqlQuery* q, QDate start, QDate end, QString box_id, QSt
     q->first();
 }
 
+void insertTransaction(QSqlQuery* q, QString sum, QDate trans_date, QString client_id, QString box_id, QString reservation_id, QString is_deposit, QDate period_start, QDate period_end){
+    std::string str;
+    if(period_start == QDate::fromString("01011900", "dd.MM.yy") || period_end == QDate::fromString("01011900", "dd.MM.yy") ){
+        std::string str = "INSERT INTO \"polbox_schema\".\"t_transactions\" (sum,date_trans, t_client_ind_id, t_box_id, t_reservation_id, is_deposit)"
+                          "VALUES ( " + sum.toStdString() + ", " + "date'" + trans_date.toString("dd.MM.yy").toStdString() + "', "+ client_id.toStdString() + ", " + box_id.toStdString() + ", " +
+                reservation_id.toStdString() + ",  " + is_deposit.toStdString() + ")";
+        const char* to_char = str.c_str();
+        const auto INSERT_TRANSACTION = QLatin1String(to_char);
+        if(!q->exec(INSERT_TRANSACTION)) qDebug() << "Failed to add transaction" << q->lastError().text();
+        q->first();
+    } else {
+        std::string str = "INSERT INTO \"polbox_schema\".\"t_transactions\" (sum,date_trans, t_client_ind_id, t_box_id, t_reservation_id, is_deposit, trans_start, trans_end)"
+                          "VALUES ( " + sum.toStdString() + ", " + "date'" + trans_date.toString("dd.MM.yy").toStdString() + "', "+ client_id.toStdString() + ", " + box_id.toStdString() + ", " +
+                reservation_id.toStdString() + ",  " + is_deposit.toStdString() + ", date'" + period_start.toString("dd.MM.yy").toStdString() + "', " + ", date'" + period_end.toString("dd.MM.yy").toStdString() + "', " + ")";
+        const char* to_char = str.c_str();
+        const auto INSERT_TRANSACTION = QLatin1String(to_char);
+        if(!q->exec(INSERT_TRANSACTION)) qDebug() << "Failed to add transaction" << q->lastError().text();
+        q->first();
+    }
+
+}
+
+void ifPayed(QSqlQuery* q, QString client_id, QString box_id, QString reservation_id){
+//    std::string str = "SELECT FROM \"polbox_schema\".\"t_transactions\" (date_trans, t_client_ind_id, t_box_id, t_reservation_id, is_deposit, trans_start, trans_end)"
+//                      "VALUES ( " + sum.toStdString() + ", " + "date'" + trans_date.toString("dd.MM.yy").toStdString() + "', "+ client_id.toStdString() + ", " + box_id.toStdString() + ", " +
+//            reservation_id.toStdString() + ",  " + is_deposit.toStdString() + ", date'" + period_start.toString("dd.MM.yy").toStdString() + "', " + ", date'" + period_end.toString("dd.MM.yy").toStdString() + "', " + ")";
+//    const char* to_char = str.c_str();
+//    const auto INSERT_TRANSACTION = QLatin1String(to_char);
+//    if(!q->exec(INSERT_TRANSACTION)) qDebug() << "Failed to add transaction" << q->lastError().text();
+//    q->first();
+}
+
 void selectReservation(QSqlQuery* q, QString boxNumber, std::vector<QString>* iterator)
 {
-    std::string str = "SELECT start_rent, end_rent, t_client_ind FROM \"polbox_schema\".\"t_reservation\" "
+    std::string str = "SELECT start_rent, end_rent, t_client_ind, id_reservation FROM \"polbox_schema\".\"t_reservation\" "
                       "WHERE t_box_id = " +boxNumber.toStdString();
     //str.erase(std::remove(str.begin(), str.end(), "\\"), str.end());
     const char* to_char = str.c_str();
@@ -89,6 +122,7 @@ void selectReservation(QSqlQuery* q, QString boxNumber, std::vector<QString>* it
     iterator->push_back(q->value(0).toString());
     iterator->push_back(q->value(1).toString());
     iterator->push_back(q->value(2).toString());
+    iterator->push_back(q->value(3).toString());
 }
 
 
