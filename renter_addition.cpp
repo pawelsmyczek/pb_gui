@@ -18,9 +18,9 @@ RenterAddition::RenterAddition(QWidget *parent) :
 
 void RenterAddition::addRenter()
 {
-    QSqlQuery *q = new QSqlQuery(QSqlDatabase::database("PB_CONN"));
-    QSqlQuery *q1 = new QSqlQuery(QSqlDatabase::database("PB_CONN"));
-    QSqlQuery *q2 = new QSqlQuery(QSqlDatabase::database("PB_CONN"));
+    std::unique_ptr<QSqlQuery> q (new QSqlQuery(QSqlDatabase::database("PB_CONN")));
+    std::unique_ptr<QSqlQuery>q1 (new QSqlQuery(QSqlDatabase::database("PB_CONN")));
+    std::unique_ptr<QSqlQuery>q2 (new QSqlQuery(QSqlDatabase::database("PB_CONN")));
 
     this->name        = ui->lineEdit->text();
     this->surname     = ui->lineEdit_2->text();
@@ -50,8 +50,8 @@ void RenterAddition::addRenter()
         try {
             QString cli_id = insertRenter(q, this->name, this->surname, this->address,
                      this->id, this->mobile, this->mail, this->account_nr);
-            insertReservation(q1, ui->dateEdit->date(), ui->dateEdit_2->date(), this->boxNumber, cli_id);
-            updateBoxState(q2, this->boxNumber);
+            QString id = insertReservation(q1, ui->dateEdit->date(), ui->dateEdit_2->date(), this->boxNumber, cli_id);
+            updateBoxState(q2, this->boxNumber, id);
             qDebug() << this->name << this->surname << this->address << this->id << this->mobile << this->mail << this->account_nr << "has been inserted";
             QMessageBox::StandardButton added = QMessageBox::information(this, "Renter added",
                              "You have succesfully added renter to box");

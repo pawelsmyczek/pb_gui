@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QSqlQuery>
+#include <memory>
 #include <db_handler.h>
 
 namespace Ui {

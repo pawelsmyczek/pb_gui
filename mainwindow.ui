@@ -60,7 +60,7 @@
   </action>
   <action name="actionLista_box_w">
    <property name="text">
-    <string>Lista boxów</string>
+    <string>Lista klientów</string>
    </property>
   </action>
   <action name="actionWyloguj">

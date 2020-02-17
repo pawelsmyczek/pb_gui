@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>628</width>
-    <height>343</height>
+    <height>353</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -109,14 +109,14 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>470</x>
+      <x>480</x>
       <y>250</y>
-      <width>121</width>
+      <width>131</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>Zatwierdz zmiany</string>
+     <string>Zatwierdz platnosc</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
@@ -135,14 +135,14 @@
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>470</x>
       <y>140</y>
-      <width>121</width>
+      <width>141</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>Usuń rezerwację</string>
+     <string>Zakończ rezerwację</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -274,6 +274,55 @@
     </property>
     <property name="text">
      <string>Za okres wynajmu:</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>210</y>
+      <width>271</width>
+      <height>101</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>190</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Komentarz</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>478</x>
+      <y>200</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Edytuj komentarz</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>270</y>
+      <width>151</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Zatwierdz komentarz</string>
     </property>
    </widget>
   </widget>

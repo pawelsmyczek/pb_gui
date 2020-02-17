@@ -22,8 +22,11 @@ add_executable(pb_gui
   boxwindow.ui
   calendar.cpp
   calendar.h
-  db_handler.h
+  clientslist.cpp
+  clientslist.h
+  clientslist.ui
   db_handler.cpp
+  db_handler.h
   invoicegen.cpp
   invoicegen.h
   loginwidow.cpp
@@ -38,6 +41,9 @@ add_executable(pb_gui
   renter_addition.cpp
   renter_addition.h
   renter_addition.ui
+  reservation_list.cpp
+  reservation_list.h
+  reservation_list.ui
 )
 
 target_link_libraries(pb_gui PRIVATE Qt5::Widgets Qt5::Sql Qt5::PrintSupport)

@@ -26,6 +26,5 @@ void LoginWidow::connectToDB()
         this->hide();
     }
     ui->lineEdit_2->setText("");
-    //QVBoxLayout *layout = new QVBoxLayout();
 
 }
