@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>806</width>
-    <height>601</height>
+    <width>622</width>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -247,13 +247,99 @@
      <string>Rezerwuj box</string>
     </property>
    </widget>
+   <widget class="QTableView" name="tableView">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>150</y>
+      <width>571</width>
+      <height>161</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_8">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>86</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Imie</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Nazwisko</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Adres</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>NIP/PESEL</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Telefon</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>e-mail</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>320</y>
+      <width>191</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rezerwuj box</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>90</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Filtruj po:</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>806</width>
+     <width>622</width>
      <height>22</height>
     </rect>
    </property>
@@ -262,6 +348,7 @@
      <string>Menu</string>
     </property>
     <addaction name="actionPowr_t"/>
+    <addaction name="actionDodaj_z_bazy_danych"/>
    </widget>
    <addaction name="menuMenu"/>
   </widget>
@@ -269,6 +356,11 @@
   <action name="actionPowr_t">
    <property name="text">
     <string>Powrót</string>
+   </property>
+  </action>
+  <action name="actionDodaj_z_bazy_danych">
+   <property name="text">
+    <string>Dodaj z bazy danych</string>
    </property>
   </action>
  </widget>

@@ -78,7 +78,7 @@ const QString insertRenter(std::unique_ptr<QSqlQuery>& q, QString name, QString 
                   QString id, QString mobile, QString mail, QString account_nr) {
     std::string str = "INSERT INTO \"polbox_schema\".\"t_client_ind\" (name,surname,adress,id,mobile,mail,account_nr)"
                       "VALUES ('" + name.toStdString() + "', '" + surname.toStdString() + "', '"
-            + adress.toStdString() + "', " + id.toStdString() + ", '" + mobile.toStdString() + "', '"
+            + adress.toStdString() + "', '" + id.toStdString() + "', '" + mobile.toStdString() + "', '"
             + mail.toStdString() + "', '" + account_nr.toStdString() + "') RETURNING id_client_ind";
     //str.erase(std::remove(str.begin(), str.end(), "\\"), str.end());
     const char* to_char = str.c_str();
@@ -88,7 +88,7 @@ const QString insertRenter(std::unique_ptr<QSqlQuery>& q, QString name, QString 
     return q->value(0).toString();
 }
 
-QString insertReservation(std::unique_ptr<QSqlQuery>& q, QDate start, QDate end, QString box_id, QString client_id) {
+const QString insertReservation(std::unique_ptr<QSqlQuery>& q, QDate start, QDate end, QString box_id, QString client_id) {
     std::string str = "INSERT INTO \"polbox_schema\".\"t_reservation\" (start_rent,end_rent,t_box_id, t_client_ind)"
                       "VALUES ( date'" + start.toString("dd.MM.yy").toStdString() + "', date'" + end.toString("dd.MM.yy").toStdString()  + "', "+ box_id.toStdString() +", "+ client_id.toStdString() +")"
                       "RETURNING id_reservation";
@@ -164,7 +164,8 @@ const QString selectBoxComment(std::unique_ptr<QSqlQuery>& q, QString boxNumber)
 
 void selectReservationData(std::unique_ptr<QSqlQuery>& q, QString boxNumber, std::vector<QString>* iterator) {
     std::string str = "SELECT start_rent, end_rent, t_client_ind, id_reservation FROM \"polbox_schema\".\"t_reservation\" "
-                      "WHERE t_box_id = " + boxNumber.toStdString();
+                      "WHERE t_box_id = " + boxNumber.toStdString() + " AND "
+                            "id_reservation = (SELECT active_reservation FROM \"polbox_schema\".\"t_box\" WHERE box_number = " + boxNumber.toStdString() + " )";
     //str.erase(std::remove(str.begin(), str.end(), "\\"), str.end());
     const char* to_char = str.c_str();
     const auto SELECT_RESERVATION = QLatin1String(to_char);
@@ -186,6 +187,21 @@ void selectRenter(std::unique_ptr<QSqlQuery>& q, QString cliNumber, std::vector<
     q->first();
     iterator->push_back(q->value(0).toString());
     iterator->push_back(q->value(1).toString());
+}
+
+
+const QString selectRenterID(std::unique_ptr<QSqlQuery>& q, QString name, QString surname, QString adress,
+                    QString id, QString mobile, QString mail, QString account_nr) {
+    std::string str = "SELECT id_client_ind FROM \"polbox_schema\".\"t_client_ind\""
+                      "WHERE name = '" + name.toStdString() + "' AND surname = '" + surname.toStdString() + "' AND "
+                            "adress = '" + adress.toStdString() + "' AND id = '" + id.toStdString() + "' AND mobile = '" + mobile.toStdString() + "' AND "
+                            "mail = '" + mail.toStdString() + "' AND account_nr = '" + account_nr.toStdString() + "' ;";
+    //str.erase(std::remove(str.begin(), str.end(), "\\"), str.end());
+    const char* to_char = str.c_str();
+    const auto CLI_ID = QLatin1String(to_char);
+    if(!q->exec(CLI_ID)) qDebug() << "Failed to add renter" << q->lastError().text() ;
+    q->first();
+    return q->value(0).toString();
 }
 
 void updateDB(std::unique_ptr<QSqlQuery>& q){

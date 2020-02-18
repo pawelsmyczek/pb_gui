@@ -12,16 +12,16 @@ ClientsList::ClientsList(QWidget *parent) :
     tableViewModel->setColumnCount(8);
     tableViewModel->setHorizontalHeaderLabels(
                                                 {"Imie",
-                                                 "Nazwisko",
-                                                 "Adres",
-                                                 "NIP/PESEL",
-                                                 "Numer tel.",
-                                                 "e-mail",
-                                                 "Numer konta",
-                                                 "Numer boxu"}
+                                               "Nazwisko",
+                                               "Adres",
+                                               "NIP/PESEL",
+                                               "Numer tel.",
+                                               "e-mail",
+                                               "Numer konta",
+                                               "Numer boxu"}
                                               );
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers); // ustawiam tryb bez możliwości edytowania pól tabeli
-    QBrush brushBackground(Qt::blue); // tworzę brush wypełnienia tła komórek
+    QBrush brushBackground(Qt::gray); // tworzę brush wypełnienia tła komórek
 
 //    foreach(Country country, countries){
     setTableWidget(tableViewModel, brushBackground, Qt::white);

@@ -17,6 +17,9 @@ find_package(Qt5PrintSupport REQUIRED)
 
 add_executable(pb_gui
   main.cpp
+  boxeslist.cpp
+  boxeslist.h
+  boxeslist.ui
   boxwindow.cpp
   boxwindow.h
   boxwindow.ui
@@ -38,6 +41,8 @@ add_executable(pb_gui
   not_rentedboxwindow.cpp
   not_rentedboxwindow.h
   not_rentedboxwindow.ui
+  qsortfiltersqlquerymodel.cpp
+  qsortfiltersqlquerymodel.h
   renter_addition.cpp
   renter_addition.h
   renter_addition.ui

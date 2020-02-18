@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <memory>
+#include "qsortfiltersqlquerymodel.h"
 #include <db_handler.h>
 
 namespace Ui {
@@ -24,9 +25,13 @@ public:
     ~RenterAddition();
 public slots:
     void addRenter();
-
+private slots:
+    void backToMain();
+    void showTableView();
+    void switchFilters(int index);
 
 private:
+    QSortFilterSqlQueryModel *model;
     Ui::renter_addition *ui;
     QRegularExpressionMatch match;
     QMessageBox message;

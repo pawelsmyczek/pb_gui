@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     populate_boxes();
     connect(ui->actionLista_rezerwacji, SIGNAL(triggered()), this, SLOT(showActiveReservations()));
     connect(ui->actionLista_box_w, SIGNAL(triggered()), this, SLOT(showActiveClients()));
+    connect(ui->actionLista_box_w_2, SIGNAL(triggered()), this, SLOT(showBoxesList()));
     qDebug() << "Main window started";
 }
 
@@ -57,6 +58,11 @@ void MainWindow::showActiveClients(){
 void MainWindow::showActiveReservations(){
     reservations = new reservation_list();
     reservations->show();
+}
+
+void MainWindow::showBoxesList(){
+    boxes = new BoxesList();
+    boxes->show();
 }
 
 
@@ -144,6 +150,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete p_button;
+    delete reservations;
+    delete clients;
 }
 
 

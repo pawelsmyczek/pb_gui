@@ -14,6 +14,7 @@
 #include <memory>
 #include "reservation_list.h"
 #include "clientslist.h"
+#include "boxeslist.h"
 #include "boxwindow.h"
 #include "not_rentedboxwindow.h"
 #include "db_handler.h"
@@ -42,12 +43,14 @@ private slots:
     void logoutFromDB();
     void showActiveReservations();
     void showActiveClients();
+    void showBoxesList();
 private:
     Ui::MainWindow *ui;
     BoxWindow *box_window;
     NotRentedBoxWindow *not_rentedboxwindow;
     reservation_list* reservations;
     ClientsList* clients;
+    BoxesList* boxes;
     // QSqlDatabase db;
     QPushButton *p_button;
     std::vector<QPushButton*> buttons;
