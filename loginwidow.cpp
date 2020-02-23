@@ -17,9 +17,14 @@ LoginWidow::~LoginWidow()
 
 void LoginWidow::connectToDB()
 {
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+    qDebug() << "Windows target";
+#elif __linux__
+    qDebug() << "Linux target";
+#endif
     name = ui->lineEdit->text();
     pass = ui->lineEdit_2->text();
-    if(addConnection("QPSQL", "polbox", "localhost", name, pass, 5432)){
+    if(addConnection("QPSQL", "some_db", "some_host", name, pass, 35942)){
         MainWindow *m = new MainWindow(this);
         //m->setLayout(layout);
         m->show();
