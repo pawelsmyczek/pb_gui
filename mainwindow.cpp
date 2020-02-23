@@ -6,9 +6,7 @@
 /*
  * TODO:
  * - generator faktur (w trakcie)
- * - edycja boxu (przedluzenie - moze byc jako dodanie nowej rezerwacji za pomocą najemcy, ktory jest w bazie)
  */
-
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -51,17 +49,17 @@ void MainWindow::connectButton(bool is_rented, bool is_payed, QPushButton *butto
 }
 
 void MainWindow::showActiveClients(){
-    clients = new ClientsList();
+    clients = new ClientsList(this);
     clients->show();
 }
 
 void MainWindow::showActiveReservations(){
-    reservations = new reservation_list();
+    reservations = new reservation_list(this);
     reservations->show();
 }
 
 void MainWindow::showBoxesList(){
-    boxes = new BoxesList();
+    boxes = new BoxesList(this);
     boxes->show();
 }
 
@@ -78,7 +76,7 @@ void MainWindow::populate_boxes()
     std::unique_ptr<QSqlQuery> update_states (new QSqlQuery(QSqlDatabase::database("PB_CONN")));
     if(!q->exec(SEL_BOXES)) qDebug() << "Failed to execute query SEL_BOXES" << q->lastError().text();
     // MAPOWANIE BOXOW po 10 na strone w korytarzu
-    updateDB(update_states);
+    // updateDB(update_states);
     number_of_boxes = countBoxes(counter, corridor);
     while(q->next()){
         std::unique_ptr<QSqlQuery> check_payment (new QSqlQuery(QSqlDatabase::database("PB_CONN")));
@@ -106,7 +104,7 @@ void MainWindow::populate_boxes()
         if(boxes_flag == number_of_boxes)     boxes_flag = 1;
         else if(boxes_flag < number_of_boxes) boxes_flag++;
 
-        number_of_boxes = countBoxes(counter, corridor);
+        number_of_boxes = countBoxes(counter, corridor); // number of boxes in a single corridor
     }
 }
 

@@ -49,6 +49,8 @@ add_executable(pb_gui
   reservation_list.cpp
   reservation_list.h
   reservation_list.ui
+  tablemodel.cpp
+  tablemodel.h
 )
 
 target_link_libraries(pb_gui PRIVATE Qt5::Widgets Qt5::Sql Qt5::PrintSupport)

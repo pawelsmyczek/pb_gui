@@ -2,10 +2,7 @@
 #define BOXESLIST_H
 
 #include <QMainWindow>
-#include <QStandardItemModel>
-#include <QSqlQuery>
-#include <memory>
-#include "db_handler.h"
+#include <tablemodel.h>
 
 namespace Ui {
 class BoxesList;
@@ -21,9 +18,8 @@ public:
 
 private:
     Ui::BoxesList *ui;
-    QStandardItemModel *tableViewModel;
+    TableModel *tableViewModel;
     void resizeEvent(QResizeEvent *event);
-    void setTableWidget(QStandardItemModel *, const QBrush&, const QColor&);
 };
 
 #endif // BOXESLIST_H

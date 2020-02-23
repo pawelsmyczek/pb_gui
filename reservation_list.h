@@ -2,10 +2,9 @@
 #define RESERVATION_LIST_H
 
 #include <QMainWindow>
-#include <QStandardItemModel>
-#include <QSqlQuery>
+#include <QTableView>
 #include <memory>
-#include "db_handler.h"
+#include <tablemodel.h>
 
 namespace Ui {
 class reservation_list;
@@ -17,12 +16,12 @@ class reservation_list : public QMainWindow
 public:
     explicit reservation_list(QWidget *parent = nullptr);
     ~reservation_list();
-
+public slots:
+    void initializeActivereservations();
 private:
     Ui::reservation_list *ui;
-    QStandardItemModel *tableViewModel;
+    TableModel *tableViewModel;
     void resizeEvent(QResizeEvent *event);
-    void setTableWidget(QStandardItemModel *, const QBrush&, const QColor&);
 };
 
 #endif // RESERVATION_LIST_H
